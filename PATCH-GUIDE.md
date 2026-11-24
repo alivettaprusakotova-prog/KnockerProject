@@ -35,7 +35,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\fix-config.ps1 -MinecraftDir "$
 Основные источники: `KnockerBrain.java` (массивы `AGREE`, `ANSWER`, `ANSWER_YES/NO/OTHER`), `KnockerExtraLines.java`, `KnockerActions.java`, `KnockerTopics.java`, `KnockerMessages.java`, `AiKnocker.java:235`.
 
 Что сделано:
-- `KnockerAI.clean(...)` вырезает сухие короткие ответы из reply ИИ — см. `KnockerChat.java`.
+- `KnockerChat.say(...)` — единая точка вывода в чат, поэтому ловит и ответ ИИ, и старые скрипты.
 - `KnockerChat.say(...)` ловит точные «Хорошо/ок/угу/да/нет/понятно/ясно» от старых модулей и заменяет их на `brain.ambient()`.
 - В промпте ИИ прямо запрещены короткие сухие ответы.
 
