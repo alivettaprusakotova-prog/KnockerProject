@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.10-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version '1.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -11,7 +11,11 @@ base {
 }
 
 repositories {
-	// The mod only needs the usual Fabric/Mojang repositories provided by Loom.
+	// GeckoLib is required at compile time (the bundled copy in resources is runtime-only).
+	maven {
+		name = 'GeckoLib'
+		url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+	}
 }
 
 dependencies {
@@ -19,6 +23,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.8.2"
 }
 
 processResources {

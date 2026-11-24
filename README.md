@@ -8,6 +8,8 @@
 ./gradlew build
 ```
 
+На Windows можно просто запустить `.\build.ps1` — скрипт сам соберёт мод и скопирует готовый файл в корень проекта как `AI-Knocker-DarkRomance-1.0.0.jar`.
+
 Готовый мод: `build/libs/aiknocker-dark-romance-1.0.0.jar`.
 
 Источники лежат в `src/main/java`, ресурсы (включая `fabric.mod.json`, анимации, звуки и встроенные `META-INF/jars`) — в `src/main/resources`.
