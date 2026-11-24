@@ -1,5 +1,8 @@
 name: Build AI Knocker jar
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
@@ -25,7 +28,19 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew --no-daemon clean build
+        shell: bash
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon clean build 2>&1 | tee build.log
+
+      - name: Save failed build log to branch
+        if: failure()
+        run: |
+          git config user.name "arena-agent"
+          git config user.email "agent@users.noreply.github.com"
+          git add -f build.log
+          git commit -m "ci: save failed build log [skip ci]" || true
+          git push
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
