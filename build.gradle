@@ -26,14 +26,6 @@ dependencies {
 	modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.8.2"
 }
 
-processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
-
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = "UTF-8"
 	options.release = 21
