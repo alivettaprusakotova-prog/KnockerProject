@@ -282,6 +282,37 @@ public class KnockerMovement {
       return ok;
    }
 
+   /**
+    * Подходит к игроку на 2–3 блока спереди и поворачивается к ней лицом —
+    * чтобы подарок упал прямо к её ногам, а не за спиной в режиме наблюдения.
+    */
+   public boolean comeToGift(class_1657 player) {
+      float yaw = player.method_36454();
+      double rad = Math.toRadians(yaw);
+      double forwardX = -Math.sin(rad);
+      double forwardZ = -Math.cos(rad);
+      double[] distances = new double[]{2.5, 2.0, 3.0};
+      double[] heights = new double[]{0.0, 1.0, -1.0};
+
+      for (double distance : distances) {
+         for (double dy : heights) {
+            class_243 pos = new class_243(player.method_23317() + forwardX * distance,
+                  player.method_23318() + dy, player.method_23321() + forwardZ * distance);
+            if (this.isFree(pos)) {
+               float knockerYaw = yaw + 180.0F;
+               this.clearTarget();
+               this.knocker.method_5942().method_6340();
+               this.knocker.method_5808(pos.field_1352, pos.field_1351, pos.field_1350, knockerYaw, 0.0F);
+               this.knocker.method_5847(knockerYaw);
+               this.knocker.method_5636(knockerYaw);
+               return true;
+            }
+         }
+      }
+
+      return false;
+   }
+
    public boolean flashBehind(class_1657 player, int ticks) {
       class_243 previous = this.flashTicks > 0 && this.flashReturnPos != null ? this.flashReturnPos : this.knocker.method_19538();
       if (!this.teleportBehind(player)) {

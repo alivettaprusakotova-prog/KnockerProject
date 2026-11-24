@@ -490,11 +490,11 @@ public class KnockerEnding {
       world.method_8501(chestPos, class_2246.field_10034.method_9564());
       class_2586 notes = world.method_8321(chestPos);
       if (notes instanceof class_2595 chest) {
-         String[] notes = new String[]{"день 1. я смотрел, как ты спишь", "ты сказала «нет». ты не это имела в виду", "здесь тебя никто не найдёт. кроме меня", "я считаю твои вдохи", "ты моя"};
+         String[] noteTexts = new String[]{"день 1. я смотрел, как ты спишь", "ты сказала «нет». ты не это имела в виду", "здесь тебя никто не найдёт. кроме меня", "я считаю твои вдохи", "ты моя"};
 
-         for(int i = 0; i < notes.length; ++i) {
+         for(int i = 0; i < noteTexts.length; ++i) {
             class_1799 note = new class_1799(class_1802.field_8407);
-            note.method_57379(class_9334.field_49631, class_2561.method_43470("§7" + notes[i]));
+            note.method_57379(class_9334.field_49631, class_2561.method_43470("§7" + noteTexts[i]));
             chest.method_5447(i * 2, note);
          }
 

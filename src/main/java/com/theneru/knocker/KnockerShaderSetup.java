@@ -65,7 +65,7 @@ public class KnockerShaderSetup implements PreLaunchEntrypoint {
                   try {
                      Objects.requireNonNull(s);
 
-                     for(Path f : s::iterator) {
+                     for(Path f : s.toList()) {
                         String n = f.getFileName().toString();
                         String low = n.toLowerCase(Locale.ROOT);
                         if (!low.endsWith(".txt")) {

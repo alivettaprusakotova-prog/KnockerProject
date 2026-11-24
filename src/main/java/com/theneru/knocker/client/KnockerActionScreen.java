@@ -32,8 +32,9 @@ public class KnockerActionScreen extends class_437 {
          double a = Math.toRadians((double)-90.0F + (double)i * (double)360.0F / (double)NAMES.length);
          int x = cx + (int)(Math.cos(a) * (double)radius) - bw / 2;
          int y = cy + (int)(Math.sin(a) * (double)radius) - bh / 2;
+         final int index = i;
          this.method_37063(class_4185.method_46430(class_2561.method_43470(NAMES[i]), (b) -> {
-            ClientPlayNetworking.send(new KnockerActionPayload(i));
+            ClientPlayNetworking.send(new KnockerActionPayload(index));
             this.method_25419();
          }).method_46434(x, y, bw, bh).method_46431());
       }
