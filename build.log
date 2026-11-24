@@ -24,40 +24,17 @@ Fabric Loom: 1.19.4
 > Task :clean
 
 > Task :compileJava
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/util/KnockerMessages.java:34: error: incompatible types: Object cannot be converted to Script
-      for(Script script : (List)SCRIPTS.getOrDefault(phase, List.of())) {
-                          ^
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerEnding.java:493: error: variable notes is already defined in method buildBasement(class_1657)
-         String[] notes = new String[]{"день 1. я смотрел, как ты спишь", "ты сказала «нет». ты не это имела в виду", "здесь тебя никто не найдёт. кроме меня", "я считаю твои вдохи", "ты моя"};
-                  ^
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:76: error: method containsAny in class KnockerMessages cannot be applied to given types;
-      if (KnockerMessages.containsAny(norm, KnockerWords.LOVE, KnockerWords.I_LIKE_YOU, KnockerWords.BEAUTIFUL)) {
-                         ^
-  required: String,String[]
-  found:    String,String[],String[],String[]
-  reason: varargs mismatch; String[] cannot be converted to String
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:103: error: cannot find symbol
-         this.pendingRude = KnockerBrain.isRudeText(message);
-             ^
-  symbol: variable pendingRude
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:211: error: cannot find symbol
-         if (this.pendingRude) {
-                 ^
-  symbol: variable pendingRude
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerGames.java:93: error: variable r is already defined in method handleChat(class_1657,String)
-            String r = this.truthOrDareChoice(norm);
-                   ^
-/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/KnockerShaderSetup.java:68: error: method reference not expected here
-                     for(Path f : s::iterator) {
-                                  ^
+/home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:125: error: local variables referenced from a lambda expression must be final or effectively final
+            .whenComplete((reply, error) -> server.execute(() -> this.onAiResult(player, message, reply, error, giftGiven)));
+                                                                                                                ^
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-7 errors
+1 error
 
 > Task :compileJava FAILED
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1795527042338.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1795527164737.json
 
 [Incubating] Problems report is available at: file:///home/runner/work/KnockerProject/KnockerProject/build/reports/problems/problems-report.html
 
@@ -66,41 +43,18 @@ FAILURE: Build failed with an exception.
 * What went wrong:
 Execution failed for task ':compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
 > Compilation failed; see the compiler output below.
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/util/KnockerMessages.java:34: error: incompatible types: Object cannot be converted to Script
-        for(Script script : (List)SCRIPTS.getOrDefault(phase, List.of())) {
-                            ^
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerEnding.java:493: error: variable notes is already defined in method buildBasement(class_1657)
-           String[] notes = new String[]{"день 1. я смотрел, как ты спишь", "ты сказала «нет». ты не это имела в виду", "здесь тебя никто не найдёт. кроме меня", "я считаю твои вдохи", "ты моя"};
-                    ^
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerGames.java:93: error: variable r is already defined in method handleChat(class_1657,String)
-              String r = this.truthOrDareChoice(norm);
-                     ^
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:76: error: method containsAny in class KnockerMessages cannot be applied to given types;
-        if (KnockerMessages.containsAny(norm, KnockerWords.LOVE, KnockerWords.I_LIKE_YOU, KnockerWords.BEAUTIFUL)) {
-                           ^
-    required: String,String[]
-    found:    String,String[],String[],String[]
-    reason: varargs mismatch; String[] cannot be converted to String
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:103: error: cannot find symbol
-           this.pendingRude = KnockerBrain.isRudeText(message);
-               ^
-    symbol: variable pendingRude
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:211: error: cannot find symbol
-           if (this.pendingRude) {
-                   ^
-    symbol: variable pendingRude
-  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/KnockerShaderSetup.java:68: error: method reference not expected here
-                       for(Path f : s::iterator) {
-                                    ^
+  /home/runner/work/KnockerProject/KnockerProject/src/main/java/com/theneru/knocker/entity/KnockerChat.java:125: error: local variables referenced from a lambda expression must be final or effectively final
+              .whenComplete((reply, error) -> server.execute(() -> this.onAiResult(player, message, reply, error, giftGiven)));
+                                                                                                                  ^
   Note: Some input files use or override a deprecated API.
   Note: Recompile with -Xlint:deprecation for details.
   Note: Some input files use unchecked or unsafe operations.
   Note: Recompile with -Xlint:unchecked for details.
-  7 errors
+  1 error
 
 * Try:
 > Check your code and dependencies to fix the compilation error(s)
 > Run with --scan to get full insights from a Build Scan (powered by Develocity).
 
-BUILD FAILED in 1m 2s
+BUILD FAILED in 47s
 2 actionable tasks: 2 executed
