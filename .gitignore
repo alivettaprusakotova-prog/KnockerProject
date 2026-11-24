@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# Minecraft dev environment
+run/
+runs/
+.loom/
+
+# IDE
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local AI runtime
+aiknocker/
+config/

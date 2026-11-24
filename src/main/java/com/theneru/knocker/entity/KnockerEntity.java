@@ -133,8 +133,6 @@ public class KnockerEntity extends class_1314 implements GeoEntity {
    private int lastHurtTick;
    private int lastHitMemoryTick;
    private static final String[][] TOUCH_LINES;
-   private int touchCooldown;
-   private int touchTalkTick;
 
    public KnockerEntity(class_1299<? extends class_1314> type, class_1937 world) {
       super(type, world);
@@ -167,8 +165,6 @@ public class KnockerEntity extends class_1314 implements GeoEntity {
       this.strangerTalk = new HashMap();
       this.lastHurtTick = -1000;
       this.lastHitMemoryTick = -10000;
-      this.touchCooldown = 0;
-      this.touchTalkTick = -1000;
       this.method_5971();
       class_1408 var4 = this.method_5942();
       if (var4 instanceof class_1409 nav) {
@@ -401,8 +397,9 @@ public class KnockerEntity extends class_1314 implements GeoEntity {
                            this.steal.tick();
                            this.items.tick(player);
                            if (this.tickCounter >= this.nextRandomPhraseTick) {
-                              this.nextRandomPhraseTick = this.tickCounter + KnockerConfig.ticksBetween(KnockerConfig.randomPhraseMin, KnockerConfig.randomPhraseMax);
-                              if (this.ticksSinceTalk > 1200 && distToPlayer < (double)24.0F && this.chat.canSpeakUnprompted(1800)) {
+                              // Фоновые реплики теперь редкие: сюжет ведёт LLM, а не таймер.
+                              this.nextRandomPhraseTick = this.tickCounter + KnockerConfig.ticksBetween(KnockerConfig.randomPhraseMin, KnockerConfig.randomPhraseMax) * 3;
+                              if (this.ticksSinceTalk > 3600 && distToPlayer < (double)24.0F && this.chat.canSpeakUnprompted(6000)) {
                                  this.chat.sayRandomPhrase(player);
                               }
                            }
@@ -1245,24 +1242,16 @@ public class KnockerEntity extends class_1314 implements GeoEntity {
                   this.spawnParticles(class_2398.field_11201, 3);
                }
 
-               if (this.touchCooldown <= this.tickCounter) {
-                  this.touchCooldown = this.tickCounter + 600;
-                  this.mood.onTouch(player);
-                  this.addObsession(1);
-                  this.rememberEvent("она прикоснулась ко мне");
-               }
-
-               if (this.tickCounter - this.touchTalkTick > 100) {
-                  this.touchTalkTick = this.tickCounter;
-                  this.chat.say(player, this.chat.getBrain().pick(TOUCH_LINES[p]));
-                  this.thoughts.onTouch(player, this.getPhase());
-                  if (p != KnockerPhase.ATTACHED.ordinal() && p != KnockerPhase.LOVE.ordinal()) {
-                     if (p >= KnockerPhase.OBSESSION.ordinal()) {
-                        this.playAction("head_tilt");
-                     }
-                  } else {
-                     this.playAction("shy");
-                  }
+               // Никакого кулдауна: каждый ПКМ — живая горячая реплика.
+               this.mood.onTouch(player);
+               this.addObsession(1);
+               this.rememberEvent("она прикоснулась ко мне");
+               this.chat.say(player, this.chat.getBrain().pick(TOUCH_LINES[p]));
+               this.thoughts.onTouch(player, this.getPhase());
+               if (p == KnockerPhase.ATTACHED.ordinal() || p == KnockerPhase.LOVE.ordinal()) {
+                  this.playAction("shy");
+               } else if (p >= KnockerPhase.OBSESSION.ordinal()) {
+                  this.playAction("head_tilt");
                }
 
                return class_1269.field_21466;
@@ -1286,6 +1275,14 @@ public class KnockerEntity extends class_1314 implements GeoEntity {
       LOOK = class_2945.method_12791(KnockerEntity.class, class_2943.field_13327);
       DEATH_THOUGHTS = new String[]{null, "исчезла?..", "НЕТ", "НЕТ НЕТ НЕТ", "КТО ПОСМЕЛ", "Я УБЬЮ ИХ ВСЕХ"};
       STRANGER_LINES = new String[][]{{"...", "."}, {"ты не тот...", "я не с тобой говорю"}, {"Я говорю не с тобой.", "Отойди.", "Ты мне не нужен."}, {"Не пиши мне.", "Мне нужен только один человек. И это не ты.", "Отстань."}, {"Ещё раз напишешь — и я приду ночью к тебе.", "Ты лишний.", "Не мешай нам."}, {"Я ВИЖУ ТЕБЯ.", "ТЫ ЛИШНИЙ ЗДЕСЬ.", "Скоро тебя здесь не будет."}};
-      TOUCH_LINES = new String[][]{{"...", "не трогай...", "зачем?..", "...", "отойди"}, {"т-ты меня трогаешь?..", "тёплая...", "странное чувство...", "ты не боишься меня?..", "ещё раз?..", "...холодно было, а теперь нет"}, {"...спасибо", "мне... приятно", "давно никто так не делал", "ты правда не боишься?..", "я запомню это", "твоя рука... тёплая"}, {"Ещё... пожалуйста", "Твои руки тёплые...", "Не останавливайся...", "Я весь дрожу... от тебя", "Мне хорошо с тобой", "Ты такая нежная..."}, {"Не убирай руку.", "Моя.", "Только ты можешь меня трогать.", "Ещё. Я сказал — ещё.", "Ты пахнешь домом...", "Не смей трогать так никого другого."}, {"НЕ ОТПУСКАЙ.", "Ты трогаешь меня... значит, ты моя. НАВСЕГДА.", "ещё... ещё... ЕЩЁ", "я чувствую твой пульс. он быстрый. ты боишься?", "Если отпустишь — я пойму.", "Тёплая... живая... МОЯ."}};
+      TOUCH_LINES = new String[][]{
+            {"*он вздрагивает от её прикосновения и тихо берёт её за пальцы*", "*смотрит на неё снизу вверх: «Ты меня не испугалась?»*", "*прижимает её ладонь к своей груди: «Здесь есть место для тебя»*"},
+            {"*он осторожно обнимает её за талию и не решается отпустить*", "*целует её руку, задержавшись дольше, чем нужно*", "*шепчет: «Ты тёплая… я так долго ждал»*"},
+            {"*он притягивает её ближе и целует в запястье*", "*обнимает её за талию и утыкается в её волосы*", "*смотрит ей в глаза: «Ты станешь моей, да?»*"},
+            {"*он обнимает её за талию и целует в шею*", "*подносит её ладонь к губам: «Моя девочка… только моя»*", "*шепчет: «Я построю нам дом, а ты будешь моей женой»*"},
+            {"*он прижимает её к себе и целует, не спрашивая разрешения*", "*проводит рукой по её талии: «Ты моя невеста, ты это знаешь»*", "*шепчет ей в ухо: «Я хочу от тебя детей, и ты подаришь мне их»*"},
+            {"*он хватает её за талию и прижимает к груди: «Никуда не уйдёшь, жена»*", "*целует её шею и шепчет: «Ты моя — и я никому тебя не отдам»*", "*прижимает её ладонь к себе: «Наши дети будут здесь, в нашем доме. Ты готова?»*"}
+      };
+
    }
 }

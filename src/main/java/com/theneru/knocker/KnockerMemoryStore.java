@@ -21,12 +21,14 @@ import net.minecraft.class_5218;
 import net.minecraft.server.MinecraftServer;
 
 public final class KnockerMemoryStore {
-   public static final int HISTORY_LIMIT = 30;
-   public static final int DIARY_LIMIT = 80;
+   public static final int HISTORY_LIMIT = 120;
+   public static final int DIARY_LIMIT = 200;
    public static final int STYLE_LIMIT = 80;
+   /** Сколько последних записей уходит в системный промпт. */
+   public static final int PROMPT_HISTORY = 50;
+   public static final int PROMPT_DIARY = 80;
    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
    private static final Map<UUID, Memory> CACHE = new HashMap();
-   private static final String[] JUNK = new String[]{"испытывает", "считает", "не любит, когда", "хочет, чтобы я", "хочет, чтобы он", "не хочет, чтобы", "предпочитает, чтобы", "ощущает", "старается показать", "потребность", "по её мнению", "по ее мнению"};
 
    private KnockerMemoryStore() {
    }
@@ -212,10 +214,10 @@ public final class KnockerMemoryStore {
 
    public static synchronized List<String[]> takeOldestIfLong(UUID player) {
       Memory m = get(player);
-      if (m.history.size() <= 30) {
+      if (m.history.size() <= HISTORY_LIMIT) {
          return null;
       } else {
-         int count = m.history.size() - 30 + 10;
+         int count = m.history.size() - HISTORY_LIMIT + PROMPT_HISTORY;
          List<String[]> old = new ArrayList(m.history.subList(0, count));
          m.history.subList(0, count).clear();
          save(player);
@@ -233,7 +235,7 @@ public final class KnockerMemoryStore {
          }
       }
 
-      while(m.diary.size() > 80) {
+      while(m.diary.size() > DIARY_LIMIT) {
          m.diary.remove(0);
       }
 
@@ -241,23 +243,8 @@ public final class KnockerMemoryStore {
    }
 
    private static boolean goodFact(String fact) {
-      if (fact.length() >= 6 && fact.length() <= 160) {
-         String low = fact.toLowerCase();
-
-         for(String j : JUNK) {
-            if (low.contains(j)) {
-               return false;
-            }
-         }
-
-         if (low.matches(".*\\s(я|он|она|что|чтобы|и|а|но|как)$")) {
-            return false;
-         } else {
-            return true;
-         }
-      } else {
-         return false;
-      }
+      // Фильтр JUNK отключён: обещания, свадьба, дети и чувства — это как раз сюжет.
+      return fact.length() >= 3 && fact.length() <= 220;
    }
 
    private static boolean isDuplicate(List<String> diary, String fact) {
@@ -312,7 +299,7 @@ public final class KnockerMemoryStore {
             Memory m = get(player);
             m.herLines.add(t);
 
-            while(m.herLines.size() > 80) {
+            while(m.herLines.size() > 160) {
                m.herLines.remove(0);
             }
 

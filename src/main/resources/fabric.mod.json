@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "aiknocker",
   "version": "1.0.0",
-  "name": "AI Knocker",
-  "description": "Живой одержимый сталкер с ИИ: 6 фаз одержимости, память о тебе, подарки, ревность, стук в окно и несколько концовок. Хоррор.\n\nКоманда VesperLorn\nТелеграм: t.me/vesperlorngame",
+  "name": "AI Knocker — Dark Romance",
+  "description": "Глубокий Dark Romance: одержимый жених, память о каждой фразе, подарки по первому капризу и живые диалоги через локальную LLM.\n\nКоманда VesperLorn\nТелеграм: t.me/vesperlorngame",
   "authors": [
     "VesperLorn"
   ],
@@ -36,11 +36,11 @@
     }
   },
   "depends": {
-    "fabricloader": "\u003e\u003d0.16.0",
+    "fabricloader": ">=0.16.0",
     "minecraft": "1.21.1",
     "fabric-api": "*",
-    "geckolib": "\u003e\u003d4.7",
-    "java": "\u003e\u003d21"
+    "geckolib": ">=4.7",
+    "java": ">=21"
   },
   "jars": [
     {

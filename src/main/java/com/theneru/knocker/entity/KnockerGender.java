@@ -1,6 +1,5 @@
 package com.theneru.knocker.entity;
 
-import com.theneru.knocker.KnockerConfig;
 import com.theneru.knocker.KnockerMemoryStore;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,19 +21,8 @@ public final class KnockerGender {
    }
 
    public static G get(UUID player) {
-      switch (KnockerConfig.playerGender) {
-         case "female":
-         case "f":
-         case "ж":
-            return KnockerGender.G.FEMALE;
-         case "male":
-         case "m":
-         case "м":
-            return KnockerGender.G.MALE;
-         default:
-            g = KnockerMemoryStore.gender(player);
-            return g == null ? KnockerGender.G.UNKNOWN : KnockerGender.G.valueOf(g);
-      }
+      // Это сюжет для девушки: Кнокер всегда говорит с ней в женском роде.
+      return KnockerGender.G.FEMALE;
    }
 
    public static void set(UUID player, G g) {
@@ -123,19 +111,15 @@ public final class KnockerGender {
    }
 
    public static String adapt(String text, UUID player) {
-      return get(player) == KnockerGender.G.MALE ? toMale(text) : text;
+      // Автоматической смены рода нет: игрок — девушка, текст остаётся женским.
+      return text;
    }
 
    public static String aiRule(UUID player) {
-      String var10000;
-      switch (get(player).ordinal()) {
-         case 0 -> var10000 = "Ты пока не знаешь, парень это или девушка. СТРОГО без рода: не говори «милый/милая», «был/была», «должен/должна», «прекрасный/прекрасная» — говори «ты здесь», «ты снова тут», «солнце», «ты». «Она» ниже — просто условно.";
-         case 1 -> var10000 = "Это девушка: обращайся к ней в женском роде.";
-         case 2 -> var10000 = "Это парень: обращайся к нему в мужском роде. Везде ниже, где написано «она/её», имеется в виду он.";
-         default -> throw new MatchException((String)null, (Throwable)null);
-      }
-
-      return var10000;
+      return "Кнокер — парень: говори о себе ТОЛЬКО в мужском роде («я пришёл», «я хочу», «я твой», "
+            + "«я буду твоим мужем»). Игрок — девушка: обращайся к ней СТРОГО на «ты» («ты», «тебя», "
+            + "«тебе», «тобой», «моя»). Никогда не говори о ней в третьем лице («она», «её», «ей») "
+            + "в прямой речи. Слова «она/её» в заметках памяти — не повод менять местоимения в диалоге.";
    }
 
    static {
