@@ -4,13 +4,19 @@
 
 ## Сборка
 
+Готовый jar уже лежит в корне: `AI-Knocker-DarkRomance-1.0.0.jar`.
+
+Сборка в облаке: GitHub Actions → workflow **Build AI Knocker jar** → артефакт `AI-Knocker-DarkRomance`. Там же используются JDK 25 и Gradle 9.8 (Loom 1.19 требует JDK 25).
+
+Локально (нужны JDK 25 и Gradle 9.8 через wrapper):
+
 ```bash
 ./gradlew build
 ```
 
 На Windows можно просто запустить `.\build.ps1` — скрипт сам соберёт мод и скопирует готовый файл в корень проекта как `AI-Knocker-DarkRomance-1.0.0.jar`.
 
-Готовый мод: `build/libs/aiknocker-dark-romance-1.0.0.jar`.
+Готовый мод из сборки: `build/libs/aiknocker-dark-romance-1.0.0.jar`.
 
 Источники лежат в `src/main/java`, ресурсы (включая `fabric.mod.json`, анимации, звуки и встроенные `META-INF/jars`) — в `src/main/resources`.
 

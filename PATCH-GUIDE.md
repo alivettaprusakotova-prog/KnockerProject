@@ -73,10 +73,12 @@ powershell -ExecutionPolicy Bypass -File .\tools\patch-text.ps1 `
 
 ## 5. Сборка
 
-```powershell
-.\build.ps1
-```
-Скрипт: `clean`, `--no-daemon`, `build`, копирует jar в корень. Готовый файл: `AI-Knocker-DarkRomance-1.0.0.jar`.
+Готовый файл уже есть: `AI-Knocker-DarkRomance-1.0.0.jar`. Пересобрать можно двумя способами:
+
+1. В GitHub: Actions → **Build AI Knocker jar** → `Run workflow`, затем скачать артефакт `AI-Knocker-DarkRomance`. Используются JDK 25 и Gradle 9.8 — всё ставится само.
+2. Локально: `.\build.ps1` (нужны JDK 25 и Gradle 9.8; скрипт делает `clean`, `--no-daemon`, `build` и копирует jar в корень).
+
+Если сборка падает с `class_*`: проверь `build.gradle` — плагин `net.fabricmc.fabric-loom-remap` версии `1.19-SNAPSHOT`, `mappings "net.fabricmc:intermediary:${project.minecraft_version}:v2"`, GeckoLib подключён в `repositories`/`dependencies`. Это уже исправлено.
 Если сборка падает с `class_*`/`package software.bernie.geckolib... not exist`: проверь `build.gradle` — плагин `net.fabricmc.fabric-loom-remap`, GeckoLib подключён в `repositories`/`dependencies`. Это уже исправлено.
 
 ## 6. Откат
