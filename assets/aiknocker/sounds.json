@@ -1,0 +1,13 @@
+{
+  "whisper":         { "subtitle": "subtitles.aiknocker.whisper",   "sounds": ["aiknocker:whisper"] },
+  "breath":          { "subtitle": "subtitles.aiknocker.breath",    "sounds": ["aiknocker:breath1", "aiknocker:breath2"] },
+  "knock":           { "subtitle": "subtitles.aiknocker.knock",     "sounds": ["aiknocker:knock"] },
+  "heartbeat":       { "subtitle": "subtitles.aiknocker.heartbeat", "sounds": ["aiknocker:heartbeat"] },
+  "laugh":           { "subtitle": "subtitles.aiknocker.laugh",     "sounds": ["aiknocker:laugh1", "aiknocker:laugh2", "aiknocker:laugh3"] },
+  "laugh_distorted": { "subtitle": "subtitles.aiknocker.laugh",     "sounds": ["aiknocker:laugh_distorted"] },
+  "scream":          { "subtitle": "subtitles.aiknocker.scream",    "sounds": ["aiknocker:scream"] },
+  "stinger":         { "subtitle": "subtitles.aiknocker.appear",    "sounds": ["aiknocker:stinger"] },
+  "glitch":          { "subtitle": "subtitles.aiknocker.appear",    "sounds": ["aiknocker:glitch"] },
+  "step":            { "subtitle": "subtitles.aiknocker.step",      "sounds": ["aiknocker:step1", "aiknocker:step2", "aiknocker:step3"] },
+  "underwater":      { "subtitle": "subtitles.aiknocker.water",     "sounds": ["aiknocker:underwater"] }
+}
