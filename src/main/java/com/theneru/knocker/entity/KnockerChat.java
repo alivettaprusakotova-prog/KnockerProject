@@ -22,6 +22,7 @@ import net.minecraft.class_2561;
 import net.minecraft.server.MinecraftServer;
 
 public class KnockerChat {
+   private static final Pattern BORING_REPLY = Pattern.compile("(?iu)^\\s*(хорошо|ок|окей|угу|ладно|да|нет|м|мм|понятно|ясно)\\s*[.!?…]*\\s*$");
    private final KnockerEntity knocker;
    private final KnockerMovement movement;
    private final Random random = new Random();
@@ -273,6 +274,12 @@ public class KnockerChat {
 
    public void say(class_1657 player, String text) {
       if (text != null && !text.isBlank()) {
+         // Старые скриптовые модули иногда говорят «Хорошо/угу/ок».
+         // В AI-режиме заменяем эти пустышки на живую атмосферную реплику.
+         if (KnockerConfig.useExternalAI() && BORING_REPLY.matcher(text).matches()) {
+            text = this.brain.ambient(this.knocker.getPhase());
+         }
+
          List<String> parts = this.humanize(player, text);
          this.sendNow(player, (String)parts.get(0));
 
