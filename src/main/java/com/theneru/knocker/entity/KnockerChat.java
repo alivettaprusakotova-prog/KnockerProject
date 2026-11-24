@@ -27,6 +27,7 @@ public class KnockerChat {
    private final KnockerMovement movement;
    private final Random random = new Random();
    private boolean waitingForAI = false;
+   private boolean pendingRude;
    private final KnockerBrain brain;
    private int lastSpokeTick = -100000;
    private final Deque<Outgoing> queue = new ArrayDeque();
@@ -73,7 +74,7 @@ public class KnockerChat {
          KnockerGender.set(player.method_5667(), KnockerGender.detect(norm));
       }
 
-      if (KnockerMessages.containsAny(norm, KnockerWords.LOVE, KnockerWords.I_LIKE_YOU, KnockerWords.BEAUTIFUL)) {
+      if (KnockerMessages.containsAny(norm, KnockerWords.LOVE) || KnockerMessages.containsAny(norm, KnockerWords.I_LIKE_YOU) || KnockerMessages.containsAny(norm, KnockerWords.BEAUTIFUL)) {
          this.knocker.getThoughts().onCompliment(player, this.knocker.getPhase(), KnockerMessages.containsAny(norm, KnockerWords.LOVE));
          this.knocker.getMood().onCompliment();
       }

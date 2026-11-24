@@ -90,9 +90,9 @@ public class KnockerGames {
          case 5:
             return this.riddleAnswer(norm);
          case 6:
-            String r = this.truthOrDareChoice(norm);
-            if (r != null) {
-               return r;
+            String r2 = this.truthOrDareChoice(norm);
+            if (r2 != null) {
+               return r2;
             }
             break;
          case 7:

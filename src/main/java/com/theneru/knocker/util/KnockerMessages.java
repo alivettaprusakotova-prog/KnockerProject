@@ -31,7 +31,7 @@ public class KnockerMessages {
       String exact = norm.trim();
       boolean goAway = containsAny(norm, KnockerWords.GO_AWAY);
 
-      for(Script script : (List)SCRIPTS.getOrDefault(phase, List.of())) {
+      for(Script script : (List<Script>) (List<?>) SCRIPTS.getOrDefault(phase, List.of())) {
          if (!goAway || script.action() != KnockerMessages.Action.TELEPORT_BEHIND && script.action() != KnockerMessages.Action.FLASH_BEHIND) {
             for(String trigger : script.triggers()) {
                if (trigger.startsWith("=")) {
