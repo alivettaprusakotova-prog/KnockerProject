@@ -92,10 +92,11 @@ public class KnockerChat {
          }
       }
 
-      boolean giftGiven = false;
+      boolean wasGiftGiven = false;
       if (KnockerItems.isGiftRequest(message)) {
-         giftGiven = this.knocker.getItems().giftFromRequest(player, message);
+         wasGiftGiven = this.knocker.getItems().giftFromRequest(player, message);
       }
+      final boolean giftGiven = wasGiftGiven;
 
       this.brain.observe(message);
 
