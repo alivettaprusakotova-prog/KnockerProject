@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "aiknocker",
+  "version": "1.0.0",
+  "name": "AI Knocker",
+  "description": "Живой одержимый сталкер с ИИ: 6 фаз одержимости, память о тебе, подарки, ревность, стук в окно и несколько концовок. Хоррор.\n\nКоманда VesperLorn\nТелеграм: t.me/vesperlorngame",
+  "authors": [
+    "VesperLorn"
+  ],
+  "contributors": [
+    "theneru"
+  ],
+  "contact": {
+    "homepage": "https://t.me/vesperlorngame",
+    "issues": "https://t.me/vesperlorngame"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/aiknocker/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.theneru.knocker.AiKnocker"
+    ],
+    "client": [
+      "com.theneru.knocker.AiKnockerClient"
+    ],
+    "preLaunch": [
+      "com.theneru.knocker.KnockerShaderSetup"
+    ]
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "Telegram — VesperLorn": "https://t.me/vesperlorngame"
+      }
+    }
+  },
+  "depends": {
+    "fabricloader": "\u003e\u003d0.16.0",
+    "minecraft": "1.21.1",
+    "fabric-api": "*",
+    "geckolib": "\u003e\u003d4.7",
+    "java": "\u003e\u003d21"
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/fabric-api-0.116.13+1.21.1.jar"
+    },
+    {
+      "file": "META-INF/jars/geckolib-fabric-1.21.1-4.8.2.jar"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:red_candle"
+    },
+    "title": {
+      "translate": "advancements.aiknocker.obsession.title"
+    },
+    "description": {
+      "translate": "advancements.aiknocker.obsession.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "aiknocker:love"
+}

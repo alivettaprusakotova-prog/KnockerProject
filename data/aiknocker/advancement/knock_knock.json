@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:oak_door"
+    },
+    "title": {
+      "translate": "advancements.aiknocker.knock_knock.title"
+    },
+    "description": {
+      "translate": "advancements.aiknocker.knock_knock.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "aiknocker:first_contact"
+}

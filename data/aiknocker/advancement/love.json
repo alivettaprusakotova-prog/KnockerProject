@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:blue_orchid"
+    },
+    "title": {
+      "translate": "advancements.aiknocker.love.title"
+    },
+    "description": {
+      "translate": "advancements.aiknocker.love.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "aiknocker:attached"
+}
